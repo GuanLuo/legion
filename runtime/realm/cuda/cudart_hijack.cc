@@ -215,6 +215,8 @@ extern "C" {
   REALM_PUBLIC_API
   cudaError_t cudaEventCreate(cudaEvent_t *event)
   {
+    // Check if hijacked
+    assert(false);
     GPUProcessor *p = get_gpu_or_die("cudaEventCreate");
     p->event_create(event, cudaEventDefault);
     return cudaSuccess;
@@ -224,6 +226,8 @@ extern "C" {
   cudaError_t cudaEventCreateWithFlags(cudaEvent_t *event,
 				       unsigned int flags)
   {
+    // Check if hijacked
+    assert(false);
     GPUProcessor *p = get_gpu_or_die("cudaEventCreateWithFlags");
     p->event_create(event, flags);
     return cudaSuccess;
@@ -232,6 +236,8 @@ extern "C" {
   REALM_PUBLIC_API
   cudaError_t cudaEventRecord(cudaEvent_t event, cudaStream_t stream /*= 0*/)
   {
+    // Check if hijacked
+    assert(false);
     GPUProcessor *p = get_gpu_or_die("cudaEventRecord");
     p->event_record(event, stream);
     return cudaSuccess;
@@ -240,6 +246,8 @@ extern "C" {
   REALM_PUBLIC_API
   cudaError_t cudaEventSynchronize(cudaEvent_t event)
   {
+    // Check if hijacked
+    assert(false);
     GPUProcessor *p = get_gpu_or_die("cudaEventSynchronize");
     p->event_synchronize(event);
     return cudaSuccess;
@@ -248,6 +256,8 @@ extern "C" {
   REALM_PUBLIC_API
   cudaError_t cudaEventDestroy(cudaEvent_t event)
   {
+    // Check if hijacked
+    assert(false);
     GPUProcessor *p = get_gpu_or_die("cudaEventDestroy");
     p->event_destroy(event);
     return cudaSuccess;
@@ -256,6 +266,8 @@ extern "C" {
   REALM_PUBLIC_API
   cudaError_t cudaEventElapsedTime(float *ms, cudaEvent_t start, cudaEvent_t end)
   {
+    // Check if hijacked
+    assert(false);
     GPUProcessor *p = get_gpu_or_die("cudaEventElapsedTime");
     p->event_elapsed_time(ms, start, end);
     return cudaSuccess;
@@ -264,6 +276,8 @@ extern "C" {
   REALM_PUBLIC_API
   cudaError_t cudaStreamCreate(cudaStream_t *stream)
   {
+    // Check if hijacked
+    assert(false);
     GPUProcessor *p = get_gpu_or_die("cudaStreamCreate");
     // This needs to be a blocking stream that serializes with the
     // "NULL" stream, which in this case is the original stream
@@ -276,6 +290,8 @@ extern "C" {
   REALM_PUBLIC_API
   cudaError_t cudaStreamCreateWithFlags(cudaStream_t *stream, unsigned int flags)
   {
+    // Check if hijacked
+    assert(false);
     GPUProcessor *p = get_gpu_or_die("cudaStreamCreateWithFlags");
     if (flags == cudaStreamNonBlocking)
       *stream = p->gpu->get_next_task_stream(true/*create*/)->get_stream();
@@ -288,6 +304,8 @@ extern "C" {
   cudaError_t cudaStreamCreateWithPriority(cudaStream_t *stream, 
 					   unsigned int flags, int priority)
   {
+    // Check if hijacked
+    assert(false);
     // We'll ignore the priority for now
     return cudaStreamCreateWithFlags(stream, flags);
   }
@@ -295,6 +313,8 @@ extern "C" {
   REALM_PUBLIC_API
   cudaError_t cudaStreamDestroy(cudaStream_t stream)
   {
+    // Check if hijacked
+    assert(false);
     /*GPUProcessor *p =*/ get_gpu_or_die("cudaStreamDestroy");
     // Ignore this for now because we know our streams are not being created on the fly
     return cudaSuccess;
@@ -303,6 +323,8 @@ extern "C" {
   REALM_PUBLIC_API
   cudaError_t cudaStreamSynchronize(cudaStream_t stream)
   {
+    // Check if hijacked
+    assert(false);
     GPUProcessor *p = get_gpu_or_die("cudaStreamSynchronize");
     p->stream_synchronize(stream);
     return cudaSuccess;
@@ -313,6 +335,8 @@ extern "C" {
 				  cudaEvent_t event,
 				  unsigned int flags)
   {
+    // Check if hijacked
+    assert(false);
     GPUProcessor *p = get_gpu_or_die("cudaStreamWaitEvent");
     p->stream_wait_on_event(stream, event);
     return cudaSuccess;
@@ -324,6 +348,8 @@ extern "C" {
 				size_t shared_memory,
 				cudaStream_t stream)
   {
+    // Check if hijacked
+    assert(false);
     GPUProcessor *p = get_gpu_or_die("cudaConfigureCall");
     p->configure_call(grid_dim, block_dim, shared_memory, stream);
     return cudaSuccess;
@@ -334,6 +360,8 @@ extern "C" {
 				size_t size,
 				size_t offset)
   {
+    // Check if hijacked
+    assert(false);
     GPUProcessor *p = get_gpu_or_die("cudaSetupArgument");
     p->setup_argument(arg, size, offset);
     return cudaSuccess;
@@ -342,6 +370,8 @@ extern "C" {
   REALM_PUBLIC_API
   cudaError_t cudaLaunch(const void *func)
   {
+    // Check if hijacked
+    assert(false);
     GPUProcessor *p = get_gpu_or_die("cudaLaunch");
     p->launch(func);
     return cudaSuccess;
@@ -355,6 +385,8 @@ extern "C" {
 			       size_t shared_memory,
 			       cudaStream_t stream)
   {
+    // Check if hijacked
+    assert(false);
     GPUProcessor *p = get_gpu_or_die("cudaLaunchKernel");
     p->launch_kernel(func, grid_dim, block_dim, args, shared_memory, stream);
     return cudaSuccess;
@@ -369,6 +401,8 @@ extern "C" {
 					  size_t shared_memory,
 					  cudaStream_t stream)
   {
+    // Check if hijacked
+    assert(false);
     GPUProcessor *p = get_gpu_or_die("cudaLaunchCooperativeKernel");
     p->launch_kernel(func, grid_dim, block_dim, args, 
 		     shared_memory, stream, true/*cooperative*/);
@@ -379,6 +413,8 @@ extern "C" {
   REALM_PUBLIC_API
   cudaError_t cudaMemGetInfo(size_t *free, size_t *total)
   {
+    // Check if hijacked
+    assert(false);
     /*GPUProcessor *p =*/ get_gpu_or_die("cudaMemGetInfo");
 
     CUresult ret = cuMemGetInfo(free, total);
@@ -390,6 +426,8 @@ extern "C" {
   REALM_PUBLIC_API
   cudaError_t cudaMalloc(void **ptr, size_t size)
   {
+    // Check if hijacked
+    assert(false);
     /*GPUProcessor *p =*/ get_gpu_or_die("cudaMalloc");
 
     // CUDART tolerates size=0, returning nullptr, but the driver API
@@ -408,6 +446,8 @@ extern "C" {
   REALM_PUBLIC_API
   cudaError_t cudaMallocHost(void **ptr, size_t size)
   {
+    // Check if hijacked
+    assert(false);
     get_gpu_or_die("cudaMallocHost");
 
     // size=0 is allowed, but the runtime doesn't always do a good job of
@@ -426,6 +466,8 @@ extern "C" {
   REALM_PUBLIC_API
   cudaError_t cudaHostAlloc(void **ptr, size_t size, unsigned int flags)
   {
+    // Check if hijacked
+    assert(false);
     get_gpu_or_die("cudaHostAlloc");
 
     // size=0 is allowed, but the runtime doesn't always do a good job of
@@ -447,6 +489,8 @@ extern "C" {
   cudaError_t cudaMallocManaged(void **ptr, size_t size,
 				unsigned flags /*= cudaMemAttachGlobal*/)
   {
+    // Check if hijacked
+    assert(false);
     get_gpu_or_die("cudaMallocManaged");
 
     // size=0 is disallowed by the runtime api, and we need to return
@@ -472,6 +516,8 @@ extern "C" {
   cudaError_t cudaPointerGetAttributes(cudaPointerAttributes *attr,
 				       const void *ptr)
   {
+    // Check if hijacked
+    assert(false);
     get_gpu_or_die("cudaPointerGetAttributes");
 
     unsigned mtype = 0;
@@ -597,6 +643,8 @@ extern "C" {
 				   int dst_device,
 				   cudaStream_t stream)
   {
+    // Check if hijacked
+    assert(false);
     GPUProcessor *p = get_gpu_or_die("cudaMemPrefetchAsync");
 
     if(stream == 0)
@@ -613,6 +661,8 @@ extern "C" {
                             cudaMemoryAdvise advice,
                             int device)
   {
+    // Check if hijacked
+    assert(false);
     /*GPUProcessor *p =*/ get_gpu_or_die("cudaMemAdvise");
 
     // NOTE: we assume the enums for cudaMeoryAdvise match the ones for
@@ -626,6 +676,8 @@ extern "C" {
   REALM_PUBLIC_API
   cudaError_t cudaFree(void *ptr)
   {
+    // Check if hijacked
+    assert(false);
     /*GPUProcessor *p =*/ get_gpu_or_die("cudaFree");
 
     CUresult ret = cuMemFree((CUdeviceptr)ptr);
@@ -637,6 +689,8 @@ extern "C" {
   REALM_PUBLIC_API
   cudaError_t cudaFreeHost(void *ptr)
   {
+    // Check if hijacked
+    assert(false);
     get_gpu_or_die("cudaFreeHost");
     CUresult ret = cuMemFreeHost(ptr);
     if (ret == CUDA_SUCCESS) return cudaSuccess;
@@ -648,6 +702,8 @@ extern "C" {
   cudaError_t cudaMemcpy(void *dst, const void *src, 
 			 size_t size, cudaMemcpyKind kind)
   {
+    // Check if hijacked
+    assert(false);
     GPUProcessor *p = get_gpu_or_die("cudaMemcpy");
     p->gpu_memcpy(dst, src, size, kind);
     return cudaSuccess;
@@ -658,6 +714,8 @@ extern "C" {
 			      size_t size, cudaMemcpyKind kind,
 			      cudaStream_t stream)
   {
+    // Check if hijacked
+    assert(false);
     GPUProcessor *p = get_gpu_or_die("cudaMemcpyAsync");
     p->gpu_memcpy_async(dst, src, size, kind, stream);
     return cudaSuccess;
@@ -667,6 +725,8 @@ extern "C" {
   cudaError_t cudaMemcpy2D(void *dst, size_t dpitch, const void *src, size_t spitch,
 			   size_t width, size_t height, cudaMemcpyKind kind)
   {
+    // Check if hijacked
+    assert(false);
     GPUProcessor *p = get_gpu_or_die("cudaMemcpy2D");
     p->gpu_memcpy2d(dst, dpitch, src, spitch, width, height, kind);
     return cudaSuccess;
@@ -677,6 +737,8 @@ extern "C" {
 				size_t spitch, size_t width, size_t height, 
 				cudaMemcpyKind kind, cudaStream_t stream)
   {
+    // Check if hijacked
+    assert(false);
     GPUProcessor *p = get_gpu_or_die("cudaMemcpy2DAsync");
     p->gpu_memcpy2d_async(dst, dpitch, src, spitch, width, height, kind, stream);
     return cudaSuccess;
@@ -685,6 +747,8 @@ extern "C" {
   REALM_PUBLIC_API
   cudaError_t cudaMemset(void *dst, int value, size_t count)
   {
+    // Check if hijacked
+    assert(false);
     GPUProcessor *p = get_gpu_or_die("cudaMemset");
     p->gpu_memset(dst, value, count);
     return cudaSuccess;
@@ -694,6 +758,8 @@ extern "C" {
   cudaError_t cudaMemsetAsync(void *dst, int value, 
 			      size_t count, cudaStream_t stream)
   {
+    // Check if hijacked
+    assert(false);
     GPUProcessor *p = get_gpu_or_die("cudaMemsetAsync");
     p->gpu_memset_async(dst, value, count, stream);
     return cudaSuccess;
@@ -702,6 +768,8 @@ extern "C" {
   REALM_PUBLIC_API
   cudaError_t cudaDeviceSynchronize(void)
   {
+    // Check if hijacked
+    assert(false);
     cudart_hijack_active = true;
 
     // instead of get_gpu_or_die, we can allow poorly written code to
@@ -744,6 +812,8 @@ extern "C" {
 				 size_t size, size_t offset,
 				 cudaMemcpyKind kind)
   {
+    // Check if hijacked
+    assert(false);
     GPUProcessor *p = get_gpu_or_die("cudaMemcpyToSymbol");
     p->gpu_memcpy_to_symbol(dst, src, size, offset, kind);
     return cudaSuccess;
@@ -754,6 +824,8 @@ extern "C" {
 				      size_t size, size_t offset,
 				      cudaMemcpyKind kind, cudaStream_t stream)
   {
+    // Check if hijacked
+    assert(false);
     GPUProcessor *p = get_gpu_or_die("cudaMemcpyToSymbolAsync");
     p->gpu_memcpy_to_symbol_async(dst, src, size, offset, kind, stream);
     return cudaSuccess;
@@ -764,6 +836,8 @@ extern "C" {
 				   size_t size, size_t offset,
 				   cudaMemcpyKind kind)
   {
+    // Check if hijacked
+    assert(false);
     GPUProcessor *p = get_gpu_or_die("cudaMemcpyFromSymbol");
     p->gpu_memcpy_from_symbol(dst, src, size, offset, kind);
     return cudaSuccess;
@@ -774,6 +848,8 @@ extern "C" {
 					size_t size, size_t offset,
 					cudaMemcpyKind kind, cudaStream_t stream)
   {
+    // Check if hijacked
+    assert(false);
     GPUProcessor *p = get_gpu_or_die("cudaMemcpyFromSymbolAsync");
     p->gpu_memcpy_from_symbol_async(dst, src, size, offset, kind, stream);
     return cudaSuccess;
@@ -782,6 +858,8 @@ extern "C" {
   REALM_PUBLIC_API
   cudaError_t cudaDeviceSetSharedMemConfig(cudaSharedMemConfig config)
   {
+    // Check if hijacked
+    assert(false);
     /*GPUProcessor *p =*/ get_gpu_or_die("cudaDeviceSetSharedMemConfig");
 
     CUsharedconfig cfg = CU_SHARED_MEM_CONFIG_DEFAULT_BANK_SIZE;
@@ -796,6 +874,8 @@ extern "C" {
   REALM_PUBLIC_API
   cudaError_t cudaGetDevice(int *device)
   {
+    // Check if hijacked
+    assert(false);
     GPUProcessor *p = get_gpu_or_die("cudaGetDevice");
 	
     // this wants the integer index, not the CUdevice
@@ -806,6 +886,8 @@ extern "C" {
   REALM_PUBLIC_API
   cudaError_t cudaGetDeviceProperties(cudaDeviceProp *prop, int index)
   {
+    // Check if hijacked
+    assert(false);
     // doesn't need a current device - the index is supplied
     CUdevice device;
     CHECK_CU( cuDeviceGet(&device, index) );
@@ -885,6 +967,8 @@ extern "C" {
   REALM_PUBLIC_API
   cudaError_t cudaDeviceGetAttribute(int *value, cudaDeviceAttr attr, int index)
   {
+    // Check if hijacked
+    assert(false);
     // doesn't need a current device - the index is supplied
     CUdevice device;
     CHECK_CU( cuDeviceGet(&device, index) );
@@ -898,6 +982,8 @@ extern "C" {
   REALM_PUBLIC_API
   cudaError_t cudaFuncGetAttributes(cudaFuncAttributes *attr, const void *func)
   {
+    // Check if hijacked
+    assert(false);
     GPUProcessor *p = get_gpu_or_die("cudaFuncGetAttributes");
 
     CUfunction handle = p->gpu->lookup_function(func);
@@ -931,6 +1017,8 @@ extern "C" {
   REALM_PUBLIC_API
   cudaError_t cudaGetFuncBySymbol(cudaFunction_t *funcPtr, const void *symbolPtr)
   {
+    // Check if hijacked
+    assert(false);
     GPUProcessor *p = get_gpu_or_die("cudaGetFuncBySymbol");
     CUfunction handle = p->gpu->lookup_function(symbolPtr);
     *funcPtr = handle;
@@ -944,6 +1032,8 @@ extern "C" {
 							    int blockSize,
 							    size_t dynamicSMemSize)
   {
+    // Check if hijacked
+    assert(false);
     GPUProcessor *p = get_gpu_or_die("cudaOccupancyMaxActiveBlocksPerMultiprocessor");
     CUfunction handle = p->gpu->lookup_function(func);
     CHECK_CU( cuOccupancyMaxActiveBlocksPerMultiprocessor(numBlocks, handle,
@@ -958,6 +1048,8 @@ extern "C" {
 								     size_t dynamicSMemSize,
 								     unsigned int flags)
   {
+    // Check if hijacked
+    assert(false);
     GPUProcessor *p = get_gpu_or_die("cudaOccupancyMaxActiveBlocksPerMultiprocessorWithFlags");
     CUfunction handle = p->gpu->lookup_function(func);
     CHECK_CU( cuOccupancyMaxActiveBlocksPerMultiprocessorWithFlags(numBlocks, handle,
@@ -968,6 +1060,8 @@ extern "C" {
   REALM_PUBLIC_API
   cudaError_t cudaGetLastError(void)
   {
+    // Check if hijacked
+    assert(false);
     get_gpu_or_die("cudaGetLastError");
     // For now we're not tracking this so if we were
     // going to die we already would have
@@ -977,6 +1071,8 @@ extern "C" {
   REALM_PUBLIC_API
   cudaError_t cudaPeekAtLastError(void)
   {
+    // Check if hijacked
+    assert(false);
     get_gpu_or_die("cudaPeekAtLastError");
     // For now we're not tracking this so if we were
     // going to die we already would have
@@ -986,6 +1082,8 @@ extern "C" {
   REALM_PUBLIC_API
   const char* cudaGetErrorName(cudaError_t error)
   {
+    // Check if hijacked
+    assert(false);
     const char *result = NULL;
     // It wasn't always the case the cuda runtime errors
     // and cuda driver errors had the same enum scheme
@@ -997,6 +1095,8 @@ extern "C" {
   REALM_PUBLIC_API
   const char* cudaGetErrorString(cudaError_t error)
   {
+    // Check if hijacked
+    assert(false);
     const char *result = NULL;
     // It wasn't always the case the cuda runtime errors
     // and cuda driver errors had the same enum scheme
@@ -1008,6 +1108,8 @@ extern "C" {
   REALM_PUBLIC_API
   cudaError_t cudaGetDeviceCount(int *count)
   {
+    // Check if hijacked
+    assert(false);
     // TODO: lie here and report just one device?
     CUresult res = cuDeviceGetCount(count);
     if(res == CUDA_SUCCESS)
@@ -1019,6 +1121,8 @@ extern "C" {
   REALM_PUBLIC_API
   cudaError_t cudaSetDevice(int device)
   {
+    // Check if hijacked
+    assert(false);
     get_gpu_or_die("cudaSetDevice");
     // Ignore calls to set the device here since we already
     // know which device we are running on
@@ -1028,6 +1132,8 @@ extern "C" {
   REALM_PUBLIC_API
   cudaError_t cudaFuncSetCacheConfig(const void *func, cudaFuncCache config)
   {
+    // Check if hijacked
+    assert(false);
     get_gpu_or_die("cudaFuncSetCacheConfig");
     // TODO: actually do something with this
     return cudaSuccess;
@@ -1036,6 +1142,8 @@ extern "C" {
   REALM_PUBLIC_API
   cudaError_t cudaDeviceSetCacheConfig(cudaFuncCache config)
   {
+    // Check if hijacked
+    assert(false);
     get_gpu_or_die("cudaDeviceSetCacheConfig");
     // TODO: actually do something with this
     return cudaSuccess;
@@ -1044,6 +1152,8 @@ extern "C" {
   REALM_PUBLIC_API
   cudaError_t cudaThreadSetCacheConfig(cudaFuncCache config)
   {
+    // Check if hijacked
+    assert(false);
     // old name for cudaDeviceSetCacheConfig
     return cudaDeviceSetCacheConfig(config);
   }
@@ -1052,6 +1162,8 @@ extern "C" {
   cudaChannelFormatDesc cudaCreateChannelDesc(int x, int y, int z, int w,
 					      cudaChannelFormatKind f)
   {
+    // Check if hijacked
+    assert(false);
     cudaChannelFormatDesc desc;
     desc.x = x;
     desc.y = y;
@@ -1067,6 +1179,8 @@ extern "C" {
 				      const cudaTextureDesc *tex_desc,
 				      const cudaResourceViewDesc *view_desc)
   {
+    // Check if hijacked
+    assert(false);
     // TODO: support
     return cudaErrorInvalidValue;
   }
@@ -1074,6 +1188,8 @@ extern "C" {
   REALM_PUBLIC_API
   cudaError_t cudaDeviceSetLimit(cudaLimit limit, size_t value)
   {
+    // Check if hijacked
+    assert(false);
     get_gpu_or_die("cudaDeviceSetLimit");
     switch(limit) {
     case cudaLimitStackSize:
@@ -1109,6 +1225,8 @@ extern "C" {
   REALM_PUBLIC_API
   cudaError_t cudaDeviceGetLimit(size_t *value, cudaLimit limit)
   {
+    // Check if hijacked
+    assert(false);
     get_gpu_or_die("cudaDeviceGetLimit");
     switch(limit) {
     case cudaLimitStackSize:
